@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ConvCalc</string>
+    <string name="Yards">Yards</string>
+    <string name="Meters">Meters</string>
+    <string name="Volume_Converter">Volume Converter</string>
+    <string name="Length_Converter">Length Converter</string>
+    <string name="Gallons">Gallons</string>
+    <string name="Liters">Liters</string>
+    <string name="Settings">Settings</string>
+    <string name="fromSpinner">fromSpinner</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string-array name="lengthUnits">
+        <item>Meters</item>
+        <item>Yards</item>
+        <item>Miles</item>
+    </string-array>
+    <string-array name="volumeUnits">
+        <item>Liters</item>
+        <item>Gallons</item>
+        <item>Quarts</item>
+    </string-array>
+</resources>
