@@ -2,11 +2,14 @@ package com.example.traxyapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,8 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView fromLabel, toLabel;
     private boolean isLengthMode;
+    private boolean isFromCalc;
     public static final int SETTINGS = 1;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +40,20 @@ public class MainActivity extends AppCompatActivity {
         Button modeButton = findViewById(R.id.modeButton);
         Button clearButton = findViewById(R.id.clearButton);
 
+        fromInput.setOnTouchListener((arg0, arg1) -> {
+            isFromCalc = true;
+            return false;
+        });
+        toInput.setOnTouchListener((arg0, arg1) -> {
+            isFromCalc = false;
+            return false;
+        });
+
         calcButton.setOnClickListener(x -> {
             KeyboardWrapper.hideSoftKeyboard(this);
             double fromVal = 0;
             double toVal = 0;
+
             if (!fromInput.getText().toString().isEmpty()) {
                 fromVal = Double.parseDouble(fromInput.getText().toString());
             }
@@ -46,16 +61,28 @@ public class MainActivity extends AppCompatActivity {
                 toVal = Double.parseDouble(toInput.getText().toString());
             }
 
-            if (isLengthMode) {
-                toInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
-                        UnitsConverterWrapper.LengthUnits.valueOf(fromLabel.getText().toString()),
-                        UnitsConverterWrapper.LengthUnits.valueOf(toLabel.getText().toString())))));
+            if (isFromCalc) {
+                if (isLengthMode) {
+                    toInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
+                            UnitsConverterWrapper.LengthUnits.valueOf(fromLabel.getText().toString()),
+                            UnitsConverterWrapper.LengthUnits.valueOf(toLabel.getText().toString())))));
+                } else {
+                    toInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
+                            UnitsConverterWrapper.VolumeUnits.valueOf(fromLabel.getText().toString()),
+                            UnitsConverterWrapper.VolumeUnits.valueOf(toLabel.getText().toString())))));
+                }
             }
             else
             {
-                toInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
-                        UnitsConverterWrapper.VolumeUnits.valueOf(fromLabel.getText().toString()),
-                        UnitsConverterWrapper.VolumeUnits.valueOf(toLabel.getText().toString())))));
+                if (isLengthMode) {
+                    fromInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
+                            UnitsConverterWrapper.LengthUnits.valueOf(toLabel.getText().toString()),
+                            UnitsConverterWrapper.LengthUnits.valueOf(fromLabel.getText().toString())))));
+                } else {
+                    fromInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
+                            UnitsConverterWrapper.VolumeUnits.valueOf(toLabel.getText().toString()),
+                            UnitsConverterWrapper.VolumeUnits.valueOf(fromLabel.getText().toString())))));
+                }
             }
         });
 
@@ -95,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
 
-            intent.putExtra("from", (String) fromLabel.getText().toString());
-            intent.putExtra("to", (String) toLabel.getText().toString());
+            intent.putExtra("from", fromLabel.getText().toString());
+            intent.putExtra("to", toLabel.getText().toString());
             intent.putExtra("isLengthMode", isLengthMode);
 
             startActivityForResult(intent, SETTINGS);
