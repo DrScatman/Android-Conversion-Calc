@@ -4,55 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/design_default_color_on_secondary"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/toLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Meters"
+        android:textColor="@color/design_default_color_on_primary"
+        app:layout_constraintBottom_toBottomOf="@+id/toInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.617"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fromLabel" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toInput"
+        app:layout_constraintTop_toTopOf="@+id/toInput" />
 
     <EditText
         android:id="@+id/fromInput"
-        android:layout_width="193dp"
+        android:layout_width="0dp"
         android:layout_height="39dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:hint="Enter from value"
         android:inputType="text"
         android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textColorHint="@color/design_default_color_on_primary"
+        app:layout_constraintEnd_toStartOf="@+id/fromLabel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/fromTitle" />
 
     <EditText
         android:id="@+id/toInput"
-        android:layout_width="193dp"
+        android:layout_width="0dp"
         android:layout_height="39dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:hint="Enter to value"
         android:inputType="text"
         android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textColorHint="@color/design_default_color_on_primary"
+        app:layout_constraintEnd_toStartOf="@+id/toLabel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fromInput" />
+        app:layout_constraintTop_toBottomOf="@+id/toTitle" />
 
     <Button
         android:id="@+id/calcButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/design_default_color_primary"
         android:text="Calculate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
+        android:textColor="@color/design_default_color_background"
+        app:layout_constraintEnd_toStartOf="@+id/clearButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toInput" />
 
@@ -60,20 +81,30 @@
         android:id="@+id/fromLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Yards"
+        android:textColor="@color/design_default_color_on_primary"
+        app:layout_constraintBottom_toBottomOf="@+id/fromInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fromInput"
+        app:layout_constraintTop_toTopOf="@+id/fromInput" />
 
     <Button
         android:id="@+id/clearButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/design_default_color_primary"
         android:text="Clear"
+        android:textColor="@color/design_default_color_on_primary"
+        app:layout_constraintEnd_toStartOf="@+id/modeButton"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calcButton"
         app:layout_constraintTop_toBottomOf="@+id/toInput" />
 
@@ -81,9 +112,14 @@
         android:id="@+id/modeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/design_default_color_primary"
         android:text="mode"
+        android:textColor="@color/design_default_color_on_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/clearButton"
         app:layout_constraintTop_toBottomOf="@+id/toInput" />
 
@@ -91,13 +127,14 @@
         android:id="@+id/titleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Length Converter"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:textColor="@color/design_default_color_on_primary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Length Converter" />
@@ -106,18 +143,22 @@
         android:id="@+id/fromTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="From"
-        app:layout_constraintBottom_toTopOf="@+id/fromInput"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/design_default_color_on_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
     <TextView
         android:id="@+id/toTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="To"
-        app:layout_constraintBottom_toTopOf="@+id/toInput"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/design_default_color_on_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fromInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

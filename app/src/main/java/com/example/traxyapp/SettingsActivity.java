@@ -1,6 +1,7 @@
 package com.example.traxyapp;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setTitle("Settings");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.design_default_color_primary)));
 
         FloatingActionButton saveButton = findViewById(R.id.saveButton);
         Spinner fromSpinner = findViewById(R.id.fromSpinner);
@@ -32,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
             ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(
                     this,
                     (isLengthMode) ? R.array.lengthUnits : R.array.volumeUnits,
-                    android.R.layout.simple_spinner_item);
+                    R.layout.spinner_item);
 
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             fromSpinner.setAdapter(arrayAdapter);
@@ -78,4 +80,6 @@ public class SettingsActivity extends AppCompatActivity {
             System.err.println("No extras found in Intent");
         }
     }
+
+
 }

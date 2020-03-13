@@ -14,27 +14,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/to"
         android:textAlignment="center"
         android:textColor="@color/design_default_color_on_primary"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fromSpinner" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/toSpinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="323dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:popupBackground="@color/design_default_color_primary"
         android:prompt="@string/fromSpinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/toView" />
 
     <TextView
@@ -43,25 +40,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/from"
         android:textAlignment="center"
         android:textColor="@color/design_default_color_on_primary"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/fromSpinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="27dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:popupBackground="@color/design_default_color_primary"
         android:prompt="@string/fromSpinner"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:popupBackground="@color/design_default_color_primary"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fromView" />
 
@@ -77,5 +72,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_check_black_24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="341dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
