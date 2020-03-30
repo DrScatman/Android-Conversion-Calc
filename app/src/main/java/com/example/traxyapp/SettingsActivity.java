@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("from", (String) fromSpinner.getSelectedItem());
                 intent.putExtra("to", (String) toSpinner.getSelectedItem());
-                setResult(MainActivity.SETTINGS, intent);
+                setResult(MainActivity.SETTINGS_RESULT, intent);
                 finish();
             });
         }

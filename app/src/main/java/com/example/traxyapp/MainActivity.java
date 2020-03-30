@@ -9,18 +9,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.traxyapp.dummy.HistoryContent;
+
+import org.joda.time.DateTime;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
-    private TextView fromLabel, toLabel;
+    private TextView fromLabel, toLabel, titleLabel;
+    private EditText fromInput, toInput;
     private boolean isLengthMode;
     private boolean isFromCalc;
-    public static final int SETTINGS = 1;
+
+    public static final int SETTINGS_RESULT = 1;
+    public static final int HISTORY_RESULT = 2;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -32,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         isLengthMode = true;
 
-        TextView titleLabel = findViewById(R.id.titleLabel);
+        titleLabel = findViewById(R.id.titleLabel);
         fromLabel = findViewById(R.id.fromLabel);
         toLabel = findViewById(R.id.toLabel);
-        EditText fromInput = findViewById(R.id.fromInput);
-        EditText toInput = findViewById(R.id.toInput);
+        fromInput = findViewById(R.id.fromInput);
+        toInput = findViewById(R.id.toInput);
 
         Button calcButton = findViewById(R.id.calcButton);
         Button modeButton = findViewById(R.id.modeButton);
@@ -73,18 +81,26 @@ public class MainActivity extends AppCompatActivity {
                             UnitsConverterWrapper.VolumeUnits.valueOf(fromLabel.getText().toString()),
                             UnitsConverterWrapper.VolumeUnits.valueOf(toLabel.getText().toString())))));
                 }
-            }
-            else
-            {
+
+                toVal = Double.parseDouble(toInput.getText().toString());
+
+                HistoryContent.addItem(new HistoryContent.HistoryItem(fromVal, toVal, isLengthMode,
+                        fromLabel.getText().toString(), toLabel.getText().toString(), DateTime.now()));
+            } else {
                 if (isLengthMode) {
-                    fromInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
+                    fromInput.setText((Double.toString(UnitsConverterWrapper.convert(toVal,
                             UnitsConverterWrapper.LengthUnits.valueOf(toLabel.getText().toString()),
                             UnitsConverterWrapper.LengthUnits.valueOf(fromLabel.getText().toString())))));
                 } else {
-                    fromInput.setText((Double.toString(UnitsConverterWrapper.convert(fromVal,
+                    fromInput.setText((Double.toString(UnitsConverterWrapper.convert(toVal,
                             UnitsConverterWrapper.VolumeUnits.valueOf(toLabel.getText().toString()),
                             UnitsConverterWrapper.VolumeUnits.valueOf(fromLabel.getText().toString())))));
                 }
+
+                fromVal = Double.parseDouble(fromInput.getText().toString());
+
+                HistoryContent.addItem(new HistoryContent.HistoryItem(toVal, fromVal, isLengthMode,
+                        toLabel.getText().toString(), fromLabel.getText().toString(), DateTime.now()));
             }
         });
 
@@ -95,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 titleLabel.setText(R.string.Volume_Converter);
                 fromLabel.setText(R.string.Gallons);
                 toLabel.setText(R.string.Liters);
-            }
-            else {
+            } else {
                 isLengthMode = true;
                 titleLabel.setText(R.string.Length_Converter);
                 fromLabel.setText(R.string.Yards);
@@ -128,23 +143,36 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("to", toLabel.getText().toString());
             intent.putExtra("isLengthMode", isLengthMode);
 
-            startActivityForResult(intent, SETTINGS);
+            startActivityForResult(intent, SETTINGS_RESULT);
+            return true;
+
+        } else if (item.getItemId() == R.id.action_history) {
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            startActivityForResult(intent, HISTORY_RESULT);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == SETTINGS) {
-            TextView fromLabel = findViewById(R.id.fromLabel);
-            TextView toLabel = findViewById(R.id.toLabel);
-
-            fromLabel.setText(data.getStringExtra("from"));
-            toLabel.setText(data.getStringExtra("to"));
+        if (resultCode == SETTINGS_RESULT) {
+            this.fromLabel.setText(data.getStringExtra("from"));
+            this.toLabel.setText(data.getStringExtra("to"));
+        } else if (resultCode == HISTORY_RESULT) {
+            if (data.hasExtra("item")) {
+                String[] vals = data.getStringArrayExtra("item");
+                this.fromInput.setText(vals[0]);
+                this.toInput.setText(vals[1]);
+                this.isLengthMode = vals[2].equals("true");
+                this.fromLabel.setText(vals[3]);
+                this.toLabel.setText(vals[4]);
+                this.titleLabel.setText(isLengthMode ? R.string.Length_Converter : R.string.Volume_Converter);
+            } else {
+                System.out.println("History intent has no extra value");
+            }
         }
-
     }
-
 }
