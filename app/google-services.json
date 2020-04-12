@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "299779984557",
+    "firebase_url": "https://mobile-dev-hw8.firebaseio.com",
+    "project_id": "mobile-dev-hw8",
+    "storage_bucket": "mobile-dev-hw8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299779984557:android:a337e9353f6a26b8200a24",
+        "android_client_info": {
+          "package_name": "com.example.traxyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299779984557-hk8u13e4g76mrqooreid9j4e947j3qen.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNHek6Pt0T4uih6HIl3-mJpeSg_kve6Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299779984557-hk8u13e4g76mrqooreid9j4e947j3qen.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

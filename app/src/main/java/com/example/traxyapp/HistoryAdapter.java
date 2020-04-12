@@ -36,15 +36,6 @@ public class HistoryAdapter extends SectionedRecyclerViewAdapter<HistoryAdapter.
     private final HashMap<String,List<HistoryItem>> dayValues;
     private final List<String> sectionHeaders;
 
-    static {
-        DateTime now = DateTime.now();
-        addItem(new HistoryItem(2.0, 1.829, true, "Yards", "Meters", now.minusDays(1)));
-        addItem(new HistoryItem(1.0, 3.785, false, "Gallons", "Liters", now.minusDays(1)));
-        addItem(new HistoryItem(2.0, 1.829, true, "Yards", "Meters", now.plusDays(1)));
-        addItem(new HistoryItem(1.0, 3.785, false, "Gallons", "Liters", now.plusDays(1)));
-    }
-
-
     public HistoryAdapter(List<HistoryItem> items, OnListFragmentInteractionListener listener) {
         //mValues = items;
         this.dayValues = new HashMap<String,List<HistoryItem>>();
@@ -52,7 +43,7 @@ public class HistoryAdapter extends SectionedRecyclerViewAdapter<HistoryAdapter.
         DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 
         for (HistoryItem hi : items) {
-            String key = "Entries for " + fmt.print(hi.timestamp);
+            String key = "Entries for " + fmt.print(DateTime.parse(hi.timestamp));
             List<HistoryItem> list = this.dayValues.get(key);
             if (list == null) {
                 list = new ArrayList<HistoryItem>();

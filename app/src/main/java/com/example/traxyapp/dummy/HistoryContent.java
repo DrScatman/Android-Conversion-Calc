@@ -27,11 +27,21 @@ public class HistoryContent {
         public final boolean isLengthMode;
         public final String fromUnits;
         public final String toUnits;
+        public String _key;
 
-        public final DateTime timestamp;
+        public final String timestamp;
+
+        public HistoryItem() {
+            this.fromVal = 0.0;
+            this.toVal = 0.0;
+            this.isLengthMode = true;
+            this.fromUnits = "Meters";
+            this.toUnits = "Yards";
+            this.timestamp = DateTime.now().toString();
+        }
 
         public HistoryItem(Double fromVal, Double toVal, boolean isLengthMode,
-                           String fromUnits, String toUnits, DateTime timestamp) {
+                           String fromUnits, String toUnits, String timestamp) {
             this.fromVal = fromVal;
             this.toVal = toVal;
             this.isLengthMode = isLengthMode;

@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import com.example.traxyapp.dummy.HistoryContent;
 import com.example.traxyapp.dummy.HistoryContent.HistoryItem;
 
+import java.util.List;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -24,9 +26,9 @@ import com.example.traxyapp.dummy.HistoryContent.HistoryItem;
  */
 public class HistoryFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
+    List<HistoryItem> allHistory;
+
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
@@ -35,9 +37,9 @@ public class HistoryFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public HistoryFragment() {
+        allHistory = MainActivity.allHistory;
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static HistoryFragment newInstance(int columnCount) {
         HistoryFragment fragment = new HistoryFragment();
@@ -71,7 +73,7 @@ public class HistoryFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new HistoryAdapter(HistoryContent.ITEMS, mListener));
+            recyclerView.setAdapter(new HistoryAdapter(allHistory, mListener));
 
             DividerItemDecoration did = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(did);
